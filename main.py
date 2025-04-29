@@ -7,6 +7,7 @@ import urequests
 import ujson
 import time
 
+#Variable du Minitel
 mini = None
 
 def init():
@@ -40,7 +41,7 @@ def connect_wifi():
 def connect_to_api(prompt):
     
     api_key = "Mettez Ici votre clée API"
-    url = "https://api.mistral.ai/v1/chat/completions"  # Mettez Votre URL de Modele que vous souhaitez
+    url = "https://api.mistral.ai/v1/chat/completions"  # Mettez Votre URL de Modèle que vous souhaitez
 
     # Préparation des headers HTTP
     headers = {
@@ -104,7 +105,6 @@ def connect_to_api(prompt):
 
 
 def send_message(prompt):
-    # Vous pouvez ici éventuellement afficher un accusé de réception
     mini.message(5, 8, 5, mini.accents("Envoi de la requête..."))
     connect_to_api(prompt + " et Réponds brièvement")
 
@@ -112,17 +112,18 @@ def send_message(prompt):
 # Connexion WiFi et initialisation
 connect_wifi()
 init()
-# Rafraichissement de l'écran puis affiche la page
+# Rafraichissement de l'écran puis affichage de la page
 mini.cls()
 mini.xdraw('page.vtx')
 # Lancement du message de bienvenue
 send_message("Tu est un Minitel Intelligent et il faut que tu te présente à l'utilisateur")
 texte_initial = ""
+
 # Boucle principale : on attend une saisie sur le Minitel
 while True:
     # Affiche une zone de saisie à la ligne 4, colonne 8, de longueur 32
     texte_saisi, touche = mini.input(ligne=4, colonne=8, longueur=32, data=texte_initial, caractere=' ', redraw=True)
-    # Si la touche ENVOI est pressée, on envoie le texte saisi comme prompt à l'API
+    # Si la touche # est pressée, on envoie le texte saisi à l'API
     if touche == ord('#'):
         send_message(texte_saisi)
 

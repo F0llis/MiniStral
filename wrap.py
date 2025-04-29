@@ -1,8 +1,7 @@
 def display_len(s):
-    """
-    Renvoie le nombre de cellules vidéo réellement occupées par la chaîne s,
-    en traitant chaque séquence d'accent (prefix 0x19 + 2 octets) comme UN seul caractère.
-    """
+
+    # Renvoie le nombre de cellules vidéo réellement occupées par la chaîne s, en traitant chaque séquence d'accent (prefix 0x19 + 2 octets) comme UN seul caractère.
+
     length = 0
     i = 0
     while i < len(s):
@@ -18,10 +17,10 @@ def display_len(s):
 
 
 def wrap_text(text, width):
-    """
-    Variante de wrap_text qui utilise display_len pour ne pas dépasser `width` cellules.
-    Retourne une liste de lignes dont la largeur d'affichage ≤ width.
-    """
+
+    # Variante de wrap_text qui utilise display_len pour ne pas dépasser `width` cellules.
+    # Retourne une liste de lignes dont la largeur d'affichage ≤ width.
+
     words = text.split(' ')
     lines = []
     line = ''
@@ -36,10 +35,8 @@ def wrap_text(text, width):
             # découpage caractère à caractère
             part = ''
             for ch in w:
-                # attention aux séquences d'accent
                 add_len = 1
                 if ch == '\x19':
-                    # ajoutez aussi les deux octets suivants
                     seq = w[w.index(ch):w.index(ch)+3]
                     part += seq
                     continue
